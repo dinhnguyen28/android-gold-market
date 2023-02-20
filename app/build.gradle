@@ -1,0 +1,56 @@
+plugins {
+    id 'com.android.application'
+    id 'com.google.secrets_gradle_plugin' version '0.5'
+}
+
+android {
+    compileSdkVersion 28
+    buildToolsVersion '27.0.3'
+
+    defaultConfig {
+        applicationId "com.example.goldpricemarket"
+        minSdkVersion 23
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+}
+android.applicationVariants.all { variant ->
+    variant.outputs.all {
+        def appName = "Gold_Price_Market"
+        def date = new Date()
+        def formattedDate = date.format('dd-MM-yyyy')
+        outputFileName = appName + formattedDate + "-${variant.versionName}-${variant.versionCode}.apk"
+    }
+}
+dependencies {
+
+    implementation 'androidx.appcompat:appcompat:1.2.0'
+    implementation 'com.google.android.material:material:1.3.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.0.4'
+    testImplementation 'junit:junit:4.+'
+    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+    //
+    implementation 'com.android.support:appcompat-v7:28.0.0'
+    implementation 'com.google.android.gms:play-services-auth:12.0.0'
+    //DrawerLayout
+    implementation 'com.android.support:design:28.0.0'
+    //PicassoImage
+    implementation 'com.squareup.picasso:picasso:2.71828'
+    implementation 'com.android.volley:volley:1.2.0'
+    implementation 'com.github.scrounger:countrycurrencypicker:1.1.1'
+}
